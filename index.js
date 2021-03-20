@@ -209,16 +209,22 @@ Practice accessing data above by console.log-ing following items:
 
 //(1) Name of the first artist (0th index) in the array
 
+// Logging the .name from the artists array at index 0.
+console.log(artists[0].name); 
 
 //(2) Bio of the third artist (2nd index) in the array 
 
-
+// Logging the .bio from the artists array at index 2.
+console.log(artists[2].bio);
 
 /* 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 Task 2: 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 
 (no function needed) 
 There is a typo in your dataset 😱 The 9th artist, Vincent Van Gogh is currently Vincent Van Dough. Use an array method to fix this issue and console.log() to check your work. */
 
+// Updates the name variable on index 8.
+artists[8].name = 'Vincent Van Gogh';
 
+console.log(artists[8].name);
 
 /* 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 Task 3: 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀  
  Use getArtistByIndex to do the following:
@@ -228,10 +234,12 @@ There is a typo in your dataset 😱 The 9th artist, Vincent Van Gogh is current
  
  Example, if getArtistByIndex is invoked with the artists array and the number 0, it will return `the artist at index 0 is Amedeo Modigliani` */
 
-function getArtistByIndex(/*Your Code Here*/) {
-  /*Your Code Here*/
-}  
+//  This functions takes an array and number which then returns a message using string literal.
+function getArtistByIndex(array, number) {
+  return (`the artist at index ${number} is ${array[number].name}`)
+}
 
+console.log(getArtistByIndex(artists, 0));
 
 
 /* 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 Task 4: 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 
@@ -242,9 +250,19 @@ Use get20s to do the following:
 Example born in 1901 and died in 1959 - included -- born in 1889 and died in 1925 not included
 If correct, the function should return ["Salvador Dali", "Frida Kahlo"]*/
 
-function get20s(/*Your Code Here*/){
-  /*Your Code Here*/
+
+// I created an empty array here and ran a loop through the user inputted array, which will split the 2 years provided into 2 seperate years and check if both are within the range required. If they are they are then pushed into the empty array I created and later returned.
+function get20s(array){
+  let newNames = [];
+  for(let i=0; i < array.length; i++){
+    if(array[i].years.split('-') >= '1900' && array[i].years.split('-') <= '2000'){
+      newNames.push(array[i].name);
+    }
+  }
+  return newNames
 }
+
+console.log(get20s(artists));
 
 
 
@@ -257,10 +275,18 @@ function get20s(/*Your Code Here*/){
  
  For example, if removeArtist is invoked with the artists array and the number 0, it will remove Amedeo Modigliani from our dataset and return the number 19. */
 
-function removeArtist(/*Your Code Here*/){
-   /*Your Code Here*/
+//  Here I created a counter and ran a loop which checks if the user inputted number (index) is === to the current array[i], if it meets this condition it is removed using the splice method and I return the count after it has been removed.
+function removeArtist(array, number){
+  let count = 0;
+   for(let i=0; i < array.length; i++){
+     if(array[i].id === number){
+    array.splice(number, 1);
+     }count++;
+   }
+   return count
 }
-   
+
+   console.log(removeArtist(artists, 0));
 
 /* 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 Task 6: 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 
 Use addArtist to do the following: 
@@ -278,10 +304,25 @@ Use addArtist to do the following:
 
 Example: addArtist(artists) should return the artists array with the above object added to the end of the array. */
 
-function addArtist(/*Your Code Here*/){
-    /*Your Code Here*/
-  }
+// Here I am created a new array that holds the new key values I want to input into the existing artists array. I then use the .push method to put my new values to the end of the array and I return the user inputted array which would be the artists array in this case.
+function addArtist(array){
+  let brandNew = [
+    { 
+      id: 20,
+      name: 'Anwar', 
+      years: '1998 - 2021',
+      genre: 'Web Design', 
+      nationality:'Hispanic',
+      bio: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Temporibus iste, fugiat accusamus numquam commodi nisi, rem officiis debitis aperiam dolor consectetur harum dolore alias repudiandae ratione ipsum facilis error autem?'
+    }  
+  ];
+  brandNew.push(array)
+  return array
+}
+   
 
+
+  console.log(addArtist(artists));
   
 
 /* 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 Task 7: 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀
@@ -291,9 +332,18 @@ Use lotsOfArt to do the following:
 
 For example lotsOfArt(artists); will return ["Amedeo Modigliani", "Rene Magritte", ... "Albrecht Dürer"]*/
 
-function lotsOfArt(/*Your Code Here*/){
-  /*Your Code Here*/
+// Here I am creating a new empty array then running a loop through the user inputted array to see if the .painting are more than 100. If it meets this condition the .name element is then pushed into my new empty array and then returned later.
+function lotsOfArt(array){
+  let over100 = [];
+  for(let i=0; i < array.length; i++){
+    if(array[i].paintings > 100){
+      over100.push(array[i].name);
+    }
+  }
+  return over100
 }
+
+console.log(lotsOfArt(artists));
 
 
 
